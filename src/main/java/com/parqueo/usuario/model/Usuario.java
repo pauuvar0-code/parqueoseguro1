@@ -15,6 +15,7 @@ public class Usuario {
     private String correo;
     private String telefono;
     private String documento;
+    
     private LocalDateTime fechaRegistro;
     
     @PrePersist
