@@ -2,10 +2,17 @@ package com.parqueo.usuario.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+    
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Vehiculo> vehiculos;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +42,6 @@ public class Usuario {
     public String getDocumento() {return documento;}
     public void setDocumento(String documento) {this.documento = documento;}
     public LocalDateTime getFechaRegistro() {return fechaRegistro;}
+    public List<Vehiculo> getVehiculos() {return vehiculos;}
+    public void setVehiculos(List<Vehiculo> vehiculos) {this.vehiculos = vehiculos;}
 }
