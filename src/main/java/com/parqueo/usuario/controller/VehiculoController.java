@@ -14,6 +14,11 @@ public class VehiculoController {
     @Autowired
     private VehiculoService vehiculoService;
     
+    @GetMapping("/usuario/{idUsuario}")
+    public List<Vehiculo> listarPorUsuario(@PathVariable Long idUsuario) {
+        return vehiculoService.listarPorUsuario(idUsuario);
+    }
+    
     @GetMapping
     public List<Vehiculo> listarVehiculos() {
         return vehiculoService.listar();

@@ -57,4 +57,9 @@ public class VehiculoService {
     public void eliminar(Long idVehiculo) {
         vehiculoRepository.deleteById(idVehiculo);
     }
+    
+    //Listar por usuario
+    public List<Vehiculo> listarPorUsuario(Long idUsuario) {
+        return vehiculoRepository.findByUsuarioIdUsuario(idUsuario);
+    }
 }
