@@ -2,6 +2,7 @@ package com.parqueo.usuario.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import jakarta.validation.constraints.*;
 import com.parqueo.usuario.model.Usuario;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
@@ -18,13 +19,28 @@ public class Vehiculo {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     
+    @NotBlank(message = "La placa es obligatoria")
+    @Size(min= 6, max= 6, message= "La placa debe tener exactamente 6 caracteres")
     private String placa;
-    private String marca;
-    private String modelo;
-    private String color;
-    private int anio;
     
+    @NotBlank(message= "La marca es obligatoria")
+    private String marca;
+    
+    @NotBlank(message= "El modelo es obligatorio")
+    private String modelo;
+    
+    @NotBlank(message= "El color es obligatorio")
+    private String color;
+    
+    @NotNull(message= "El año es obligatorio")
+    @Min(value= 1900, message="El año no puede ser menor a 1900")
+    @Max(value= 2100, message="El año no puede ser mayor a 2100")
+    private Integer anio;
+    
+    @NotBlank(message= "La categoria es obligatoria")
     private String categoria;
+    
+    
     private LocalDateTime fechaIngreso;
     
     //Getters y Setters

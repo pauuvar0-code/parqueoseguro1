@@ -4,6 +4,7 @@ import com.parqueo.usuario.model.Vehiculo;
 import com.parqueo.usuario.service.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -25,12 +26,12 @@ public class VehiculoController {
     }
     
     @PostMapping
-    public Vehiculo crearVehiculo(@RequestBody Vehiculo vehiculo) {
+    public Vehiculo guardar(@Valid @RequestBody Vehiculo vehiculo) {
         return vehiculoService.guardar(vehiculo);
     }
     
     @PutMapping("/{idVehiculo}")
-    public Vehiculo actualizarVehiculo(@PathVariable Long idVehiculo, @RequestBody Vehiculo vehiculoActualizado) {
+    public Vehiculo actualizarVehiculo(@PathVariable Long idVehiculo, @Valid @RequestBody Vehiculo vehiculoActualizado) {
         return vehiculoService.actualizar(idVehiculo, vehiculoActualizado);
     }
     
