@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Service
 public class VehiculoService {
     
+    private final int capacidadMaxima = 5;
+    
     @Autowired
     private VehiculoRepository vehiculoRepository;
     
@@ -27,7 +29,14 @@ public class VehiculoService {
     
     //Crear
     public Vehiculo guardar(Vehiculo vehiculo) {
+        long vehiculosActuales = vehiculoRepository.count();
+        
+        if(vehiculosActuales >= capacidadMaxima) {
+            throw new RuntimeException("No hay plazas disponibles");
+        }
+        
         vehiculo.setFechaIngreso(LocalDateTime.now());
+        
         if(vehiculo.getUsuario() != null) {
             Long IdUsuario = vehiculo.getUsuario().getIdUsuario();
             Usuario usuario = usuarioRepository.findById(IdUsuario)
